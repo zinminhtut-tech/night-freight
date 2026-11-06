@@ -1,0 +1,324 @@
+[gd_scene load_steps=19 format=3 uid="uid://nfmenu000001"]
+
+[ext_resource type="Texture2D" path="res://assets/bg/backdrop.png" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/title.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/plank_play.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/ui/plank_play_hover.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/ui/plank_play_pressed.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/ui/plank_settings.png" id="7"]
+[ext_resource type="Texture2D" path="res://assets/ui/plank_settings_hover.png" id="8"]
+[ext_resource type="Texture2D" path="res://assets/ui/plank_settings_pressed.png" id="9"]
+[ext_resource type="Texture2D" path="res://assets/ui/plank_back.png" id="10"]
+[ext_resource type="Texture2D" path="res://assets/ui/plank_back_hover.png" id="11"]
+[ext_resource type="Texture2D" path="res://assets/ui/plank_back_pressed.png" id="12"]
+[ext_resource type="Texture2D" path="res://assets/ui/panel.png" id="13"]
+[ext_resource type="Texture2D" path="res://assets/ui/knob.png" id="14"]
+[ext_resource type="Script" path="res://menu.gd" id="15"]
+[ext_resource type="Texture2D" path="res://assets/ui/mute_on.png" id="16"]
+[ext_resource type="Texture2D" path="res://assets/ui/mute_off.png" id="17"]
+
+[sub_resource type="StyleBoxFlat" id="slider_bg"]
+bg_color = Color(0.1, 0.07, 0.04, 1)
+border_color = Color(0.42, 0.31, 0.12, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="slider_fill"]
+bg_color = Color(0.78, 0.55, 0.22, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="Menu" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15")
+
+[node name="BackdropA" type="TextureRect" parent="."]
+offset_right = 3024.0
+offset_bottom = 648.0
+texture = ExtResource("1")
+expand_mode = 1
+
+[node name="BackdropB" type="TextureRect" parent="."]
+offset_left = 3024.0
+offset_right = 6048.0
+offset_bottom = 648.0
+texture = ExtResource("1")
+expand_mode = 1
+
+[node name="Dim" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.03, 0.06, 0.3)
+
+[node name="Content" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -280.0
+offset_right = 540.0
+offset_bottom = 280.0
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="TitleRect" type="TextureRect" parent="Content"]
+custom_minimum_size = Vector2(1080, 268)
+size_flags_horizontal = 4
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayBtn" type="TextureButton" parent="Content"]
+custom_minimum_size = Vector2(460, 92)
+size_flags_horizontal = 4
+texture_normal = ExtResource("4")
+texture_pressed = ExtResource("6")
+texture_hover = ExtResource("5")
+
+[node name="SettingsBtn" type="TextureButton" parent="Content"]
+custom_minimum_size = Vector2(460, 92)
+size_flags_horizontal = 4
+texture_normal = ExtResource("7")
+texture_pressed = ExtResource("9")
+texture_hover = ExtResource("8")
+
+[node name="FooterLabel" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -42.0
+offset_bottom = -14.0
+theme_override_colors/font_color = Color(0.85, 0.78, 0.6, 0.75)
+theme_override_font_sizes/font_size = 15
+text = "A HAUNTED NIGHT TRAIN"
+horizontal_alignment = 1
+
+[node name="SettingsPanel" type="Control" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim2" type="ColorRect" parent="SettingsPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="PanelTex" type="TextureRect" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -250.0
+offset_right = 350.0
+offset_bottom = 250.0
+texture = ExtResource("13")
+expand_mode = 1
+
+[node name="PanelTitle" type="Label" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -224.0
+offset_right = 350.0
+offset_bottom = -180.0
+theme_override_colors/font_color = Color(0.92, 0.82, 0.58, 1)
+theme_override_font_sizes/font_size = 34
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="BgmLabel" type="Label" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = -101.0
+offset_right = -104.0
+offset_bottom = -69.0
+theme_override_colors/font_color = Color(0.88, 0.82, 0.68, 1)
+theme_override_font_sizes/font_size = 20
+text = "MUSIC"
+
+[node name="BgmSlider" type="HSlider" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -97.0
+offset_right = 208.0
+offset_bottom = -73.0
+theme_override_icons/grabber = ExtResource("14")
+theme_override_styles/slider = SubResource("slider_bg")
+theme_override_styles/grabber_area = SubResource("slider_fill")
+theme_override_styles/grabber_area_highlight = SubResource("slider_fill")
+max_value = 100.0
+step = 1.0
+
+[node name="BgmValue" type="Label" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 220.0
+offset_top = -101.0
+offset_right = 304.0
+offset_bottom = -69.0
+theme_override_colors/font_color = Color(0.92, 0.82, 0.58, 1)
+theme_override_font_sizes/font_size = 20
+text = "80%"
+horizontal_alignment = 1
+
+[node name="SfxLabel" type="Label" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = -11.0
+offset_right = -104.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.88, 0.82, 0.68, 1)
+theme_override_font_sizes/font_size = 20
+text = "SOUND EFFECTS"
+
+[node name="SfxSlider" type="HSlider" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -7.0
+offset_right = 208.0
+offset_bottom = 17.0
+theme_override_icons/grabber = ExtResource("14")
+theme_override_styles/slider = SubResource("slider_bg")
+theme_override_styles/grabber_area = SubResource("slider_fill")
+theme_override_styles/grabber_area_highlight = SubResource("slider_fill")
+max_value = 100.0
+step = 1.0
+
+[node name="SfxValue" type="Label" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 220.0
+offset_top = -11.0
+offset_right = 304.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.92, 0.82, 0.58, 1)
+theme_override_font_sizes/font_size = 20
+text = "90%"
+horizontal_alignment = 1
+
+[node name="VoiceLabel" type="Label" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = 64.0
+offset_right = -104.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.88, 0.82, 0.68, 1)
+theme_override_font_sizes/font_size = 20
+text = "CHARACTER VOICE"
+
+[node name="VoiceSlider" type="HSlider" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = 68.0
+offset_right = 208.0
+offset_bottom = 92.0
+theme_override_icons/grabber = ExtResource("14")
+theme_override_styles/slider = SubResource("slider_bg")
+theme_override_styles/grabber_area = SubResource("slider_fill")
+theme_override_styles/grabber_area_highlight = SubResource("slider_fill")
+max_value = 100.0
+step = 1.0
+
+[node name="VoiceValue" type="Label" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 220.0
+offset_top = 64.0
+offset_right = 304.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.92, 0.82, 0.58, 1)
+theme_override_font_sizes/font_size = 20
+text = "90%"
+horizontal_alignment = 1
+
+[node name="MuteLabel" type="Label" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = 124.0
+offset_right = -104.0
+offset_bottom = 156.0
+theme_override_colors/font_color = Color(0.88, 0.82, 0.68, 1)
+theme_override_font_sizes/font_size = 20
+text = "MASTER MUTE"
+
+[node name="MuteBtn" type="CheckButton" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = 116.0
+offset_right = 208.0
+offset_bottom = 164.0
+theme_override_icons/checked = ExtResource("17")
+theme_override_icons/unchecked = ExtResource("16")
+expand_icon = true
+
+[node name="BackBtn" type="TextureButton" parent="SettingsPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 170.0
+offset_right = 150.0
+offset_bottom = 242.0
+texture_normal = ExtResource("10")
+texture_pressed = ExtResource("12")
+texture_hover = ExtResource("11")
+
+[node name="MenuBGM" type="AudioStreamPlayer" parent="."]
+volume_db = -13.0
+bus = &"BGM"

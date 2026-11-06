@@ -1,0 +1,313 @@
+[gd_scene load_steps=36 format=3]
+
+[ext_resource type="Script" path="res://main.gd" id="1"]
+[ext_resource type="PackedScene" path="res://player.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://chochin.tscn" id="3"]
+[ext_resource type="Script" path="res://bench.gd" id="4"]
+[ext_resource type="Script" path="res://lever.gd" id="5"]
+[ext_resource type="Script" path="res://hud.gd" id="6"]
+[ext_resource type="Texture2D" path="res://assets/bg/carriage.png" id="7"]
+[ext_resource type="Texture2D" path="res://assets/tex/floor.png" id="8"]
+[ext_resource type="Texture2D" path="res://assets/tex/beam.png" id="9"]
+[ext_resource type="Texture2D" path="res://assets/tex/door.png" id="10"]
+[ext_resource type="Texture2D" path="res://assets/ui/hp_frame.png" id="11"]
+[ext_resource type="Texture2D" path="res://assets/ui/hp_fill.png" id="12"]
+[ext_resource type="Texture2D" path="res://assets/ui/hp_empty.png" id="13"]
+[ext_resource type="Texture2D" path="res://assets/props/rest_area.png" id="14"]
+[ext_resource type="Texture2D" path="res://assets/props/platform_band.png" id="15"]
+[ext_resource type="Texture2D" path="res://assets/props/lever.png" id="16"]
+[ext_resource type="Texture2D" path="res://assets/props/door_recess.png" id="23"]
+[ext_resource type="Texture2D" path="res://assets/props/door_slab.png" id="24"]
+[ext_resource type="Texture2D" path="res://assets/props/door_pier.png" id="25"]
+[ext_resource type="Texture2D" path="res://assets/props/door_pixel.png" id="19"]
+[ext_resource type="Texture2D" path="res://assets/props/lever_pixel.png" id="20"]
+[ext_resource type="Texture2D" path="res://assets/bg/carriage_body.png" id="21"]
+[ext_resource type="Texture2D" path="res://assets/bg/backdrop.png" id="22"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lever"]
+atlas = ExtResource("20")
+region = Rect2(0, 0, 57, 57)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(1760, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(40, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_above_door"]
+size = Vector2(190, 292)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_a"]
+size = Vector2(336, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_b"]
+size = Vector2(240, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bench"]
+size = Vector2(96, 68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lever"]
+size = Vector2(96, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(244, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(120, 254)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_back_exit"]
+size = Vector2(99, 254)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Backdrop" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="BackdropA" type="Sprite2D" parent="Backdrop"]
+position = Vector2(840, 324)
+scale = Vector2(0.643, 0.643)
+texture = ExtResource("22")
+
+[node name="BackdropB" type="Sprite2D" parent="Backdrop"]
+position = Vector2(3045, 324)
+scale = Vector2(0.643, 0.643)
+texture = ExtResource("22")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(840, 324)
+scale = Vector2(0.7483, 0.7483)
+texture = ExtResource("21")
+
+[node name="FloorBand" type="TextureRect" parent="."]
+offset_left = -40.0
+offset_top = 548.0
+offset_right = 1720.0
+offset_bottom = 648.0
+expand_mode = 1
+texture = ExtResource("8")
+
+[node name="World" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Floor" type="CollisionShape2D" parent="World"]
+position = Vector2(840, 620)
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="LeftWall" type="CollisionShape2D" parent="World"]
+position = Vector2(-20, 324)
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightWall" type="CollisionShape2D" parent="World"]
+position = Vector2(1700, 324)
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="AboveDoor" type="CollisionShape2D" parent="World"]
+position = Vector2(1580, 146)
+shape = SubResource("RectangleShape2D_above_door")
+
+[node name="BackAboveDoor" type="CollisionShape2D" parent="World"]
+position = Vector2(30, 146)
+disabled = true
+shape = SubResource("RectangleShape2D_above_door")
+
+[node name="PlatformA" type="CollisionShape2D" parent="World"]
+position = Vector2(620, 472.5)
+shape = SubResource("RectangleShape2D_plat_a")
+
+[node name="PlatformAVisual" type="TextureRect" parent="World"]
+offset_left = 452.0
+offset_top = 458.0
+offset_right = 788.0
+offset_bottom = 487.0
+expand_mode = 1
+texture = ExtResource("15")
+
+[node name="PlatformB" type="CollisionShape2D" parent="World"]
+position = Vector2(1080, 382.5)
+shape = SubResource("RectangleShape2D_plat_b")
+
+[node name="PlatformBVisual" type="TextureRect" parent="World"]
+offset_left = 960.0
+offset_top = 368.0
+offset_right = 1200.0
+offset_bottom = 397.0
+expand_mode = 1
+texture = ExtResource("15")
+
+[node name="Bench" type="Node2D" parent="."]
+position = Vector2(150, 592)
+script = ExtResource("4")
+
+[node name="BenchVisual" type="TextureRect" parent="Bench"]
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 0.0
+expand_mode = 1
+texture = ExtResource("14")
+
+[node name="InteractArea" type="Area2D" parent="Bench"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bench/InteractArea"]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_bench")
+
+[node name="Lever" type="Node2D" parent="."]
+position = Vector2(1470, 592)
+script = ExtResource("5")
+
+[node name="LeverArt" type="TextureRect" parent="Lever"]
+offset_left = -70.0
+offset_top = -140.0
+offset_right = 70.0
+offset_bottom = 0.0
+expand_mode = 1
+texture = SubResource("AtlasTexture_lever")
+
+[node name="InteractArea" type="Area2D" parent="Lever"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lever/InteractArea"]
+position = Vector2(0, -34)
+shape = SubResource("RectangleShape2D_lever")
+
+[node name="Lever2" type="Node2D" parent="."]
+visible = false
+position = Vector2(215, 592)
+script = ExtResource("5")
+
+[node name="LeverArt" type="TextureRect" parent="Lever2"]
+offset_left = -70.0
+offset_top = -140.0
+offset_right = 70.0
+offset_bottom = 0.0
+expand_mode = 1
+texture = SubResource("AtlasTexture_lever")
+
+[node name="InteractArea" type="Area2D" parent="Lever2"]
+monitoring = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lever2/InteractArea"]
+position = Vector2(0, -34)
+shape = SubResource("RectangleShape2D_lever")
+
+[node name="Door" type="StaticBody2D" parent="."]
+position = Vector2(1580, 486)
+collision_layer = 1
+collision_mask = 0
+
+[node name="DoorShape" type="CollisionShape2D" parent="Door"]
+position = Vector2(70, -44)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Recess" type="Sprite2D" parent="Door"]
+position = Vector2(35, -26)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("23")
+
+[node name="DoorSlab" type="Sprite2D" parent="Door"]
+z_index = 1
+position = Vector2(40, -21.5)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("24")
+
+[node name="DoorPier" type="Sprite2D" parent="Door"]
+z_index = 2
+position = Vector2(70, -157.5)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("25")
+
+[node name="ExitGlow" type="ColorRect" parent="."]
+offset_left = 1570.0
+offset_top = 338.0
+offset_right = 1669.0
+offset_bottom = 592.0
+color = Color(0.95, 0.75, 0.35, 0.22)
+
+[node name="ExitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+position = Vector2(1620, 465)
+shape = SubResource("RectangleShape2D_exit")
+
+[node name="BackDoor" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2(100, 486)
+collision_layer = 1
+collision_mask = 0
+
+[node name="BackDoorShape" type="CollisionShape2D" parent="BackDoor"]
+position = Vector2(-70, -44)
+disabled = true
+shape = SubResource("RectangleShape2D_door")
+
+[node name="BackRecess" type="Sprite2D" parent="BackDoor"]
+position = Vector2(-35, -26)
+scale = Vector2(0.85, 0.85)
+flip_h = true
+texture = ExtResource("23")
+
+[node name="BackSlab" type="Sprite2D" parent="BackDoor"]
+z_index = 1
+position = Vector2(-40, -21.5)
+scale = Vector2(0.85, 0.85)
+flip_h = true
+texture = ExtResource("24")
+
+[node name="BackPier" type="Sprite2D" parent="BackDoor"]
+z_index = 2
+position = Vector2(-70, -157.5)
+scale = Vector2(0.85, 0.85)
+flip_h = true
+texture = ExtResource("25")
+
+[node name="BackExitGlow" type="ColorRect" parent="."]
+visible = false
+offset_left = 11.0
+offset_top = 338.0
+offset_right = 110.0
+offset_bottom = 592.0
+color = Color(0.95, 0.75, 0.35, 0.22)
+
+[node name="BackExitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackExitArea"]
+position = Vector2(60, 465)
+shape = SubResource("RectangleShape2D_back_exit")
+
+[node name="Player" parent="." instance=ExtResource("2")]
+position = Vector2(110, 500)
+
+[node name="Chochin" parent="." instance=ExtResource("3")]
+position = Vector2(880, 430)
+
+[node name="Chochin2" parent="." instance=ExtResource("3")]
+position = Vector2(640, 300)
+
+[node name="Chochin3" parent="." instance=ExtResource("3")]
+position = Vector2(1180, 320)
+
+[node name="Chochin4" parent="." instance=ExtResource("3")]
+position = Vector2(1380, 450)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(840, 324)
+zoom = Vector2(0.686, 0.686)
+enabled = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("6")
+
+
